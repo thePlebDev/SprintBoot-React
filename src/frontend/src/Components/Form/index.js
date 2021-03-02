@@ -1,15 +1,16 @@
-import React from 'react';
+import React,{useState} from 'react';
 import "antd/dist/antd.css";
 
 //I STILL NEED TO QUERY THE DATABASE FOR THE ACTUAL DATA
 
 
 import {
-    Table
+    Table,
+    Modal
 } from 'antd'
 
 
-const Form =()=>{
+const Form =({setOpen,open})=>{
     const columns =[
         {
             title:'StudentId',
@@ -36,9 +37,21 @@ const Form =()=>{
 
         }
     ]
+    const onOpen =()=>{
+        setOpen(true)
+    }
+    const onClock =()=>{
+        setOpen(false)
+    }
+
     
     return(
+        <>
         <Table dataSource={students} columns={columns} rowKey='studentId'/>
+        <Modal title="Add new student" visible={open} onOk={onOpen} onCancel={onClock}>
+            <h2>Hello from the modal</h2>
+        </Modal>
+        </>
     )
 }
 
